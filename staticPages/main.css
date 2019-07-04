@@ -1,0 +1,204 @@
+
+/* 首页 Msite */
+ .Msite{
+    background-color: #F5F5F5;
+    margin-bottom: 4.5rem;
+ }   
+ .top_area{         /* 顶部区域 */
+    width: 100%;
+    height: 4rem;
+    background-color: #00A774;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+ }
+.position_add{
+    font-size: 1.7rem;
+    width: 60%;
+}
+.search_icon::before{
+    font-size: 1.7rem;
+}
+.login_regis{
+    font-size: 1.2rem;
+}
+
+.foods_classes{          /* 食品分类 */
+    width: 100%;
+    height: 16rem;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    margin-top: 4rem;
+}
+.circle{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+
+}
+.circle div{
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background-color: #ddd;
+    float: left;
+    margin: 0 5px;
+}
+.circle .active{
+    background-color: #00A774;
+}
+
+.outer_box{
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* z-index: 0; */
+    /* overflow-x: hidden; */
+}
+.outer_box>*{
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+.outer_box .item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;   
+    width: 25%;
+    height: 50%;
+    padding: 6px 0;
+    font-size: 1.3rem;
+    color: #666;
+}
+.outer_box img{
+    width: 4rem;
+    height: 4rem;
+}
+
+
+.nearby_shop_list{         /* 附近商家 */ 
+    margin-top: 10px;
+    width: 100%;
+    
+    background-color: #fff;
+}
+.nearby_shop_list>.title{
+    font-size: 1.4rem;
+    color: #999;
+    padding: 5px 8px;
+}
+.shop_item{
+    border-bottom: 1px solid #eee;
+    padding: 10px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10rem;
+}
+.shop_item img{
+    width: 7rem;
+    height: 7rem;
+}
+.middle{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 7rem;
+}
+.middle .title .flag{
+    font-size: 1.1rem;
+    background-color: #FFD92F;
+    color: #333;
+}
+.middle .title .shop_name{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+.middle .sales{
+    font-size: 0.8rem;
+    color: #999;
+}
+.middle .sales .stars{
+    color: #FF9900;
+    font-size: 1.5rem;
+}
+.middle .price{
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.right{
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.right p{
+    color: #999;
+    font-size: 1rem;
+}
+.right span{
+    color: #00A774;
+    border: 1px solid #00A774;
+    font-size: 0.6rem;
+    margin-top: 20px;
+}
+
+/* 首页 Msite  end */
+
+
+
+
+
+
+
+
+/* 底部主导航 FooterGuide */
+.FooterGuide{
+    width: 100%;
+    height: 4.5rem;
+    border-top: 1px solid #eee;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+
+}
+.FooterGuide .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 5px 0;
+    justify-content: space-around;
+
+}
+.item.active{
+    color: #0185FF;
+}
+
+
+/* 底部主导航 FooterGuide  end  */
