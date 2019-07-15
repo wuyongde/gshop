@@ -5,138 +5,64 @@
       <i class="iconfont iconliebiao"></i>
       <span>附近商家</span>
     </p>
-    <ul>
-      <li class="shop_item">
+    <ul v-if="show_nearby_shops">
+      <li @click="$router.push('/Shop')"  class="shop_item" v-for="(item, index) in nearby_shops" :key="index" >
         <div class="left">
-          <img src="./images/shop/1.jpg" alt>
+          <img :src="base_image_url+item.image_path" alt />
         </div>
         <div class="middle">
           <p class="title">
             <i class="flag">品牌</i>
-            <span class="shop_name ellipsis">小李私房菜</span>
+            <span class="shop_name ellipsis">{{item.name}}</span>
           </p>
           <p class="sales">
-            <i class="stars">****</i>
-            <i class="score">3.6</i>
-            <i class="sales_sum">月售106单</i>
+            <Stars :size="24" :score="item.rating"></Stars>
+            <i class="score">{{item.rating}}</i>
+            <i class="sales_sum">月售{{item.recent_order_num}}单</i>
           </p>
           <p class="price">
-            <i class="start_price">$20起送</i>
+            <i class="start_price">${{item.float_minimum_order_amount}}起送</i>
             <i class="xie">/</i>
-            <i class="peisonfei">配送费约$5</i>
+            <i class="peisonfei">配送费约${{item.float_delivery_fee}}</i>
           </p>
         </div>
         <div class="right">
-          <p class="flag">保 准 票</p>
-          <span>硅谷专送</span>
+          <div class="flag">
+            <span v-for="(item2, index) in item.supports[0].icon_name" :key="index">{{item2}}</span>
+          </div>
+          <span>{{item.delivery_mode.text}}</span>
         </div>
-      </li>
-      <li class="shop_item">
-        <div class="left">
-          <img src="./images/shop/1.jpg" alt>
-        </div>
-        <div class="middle">
-          <p class="title">
-            <i class="flag">品牌</i>
-            <span class="shop_name ellipsis">小李私房菜</span>
-          </p>
-          <p class="sales">
-            <i class="stars">****</i>
-            <i class="score">3.6</i>
-            <i class="sales_sum">月售106单</i>
-          </p>
-          <p class="price">
-            <i class="start_price">$20起送</i>
-            <i class="xie">/</i>
-            <i class="peisonfei">配送费约$5</i>
-          </p>
-        </div>
-        <div class="right">
-          <p class="flag">保 准 票</p>
-          <span>硅谷专送</span>
-        </div>
-      </li>
-      <li class="shop_item">
-        <div class="left">
-          <img src="./images/shop/1.jpg" alt>
-        </div>
-        <div class="middle">
-          <p class="title">
-            <i class="flag">品牌</i>
-            <span class="shop_name ellipsis">小李私房菜</span>
-          </p>
-          <p class="sales">
-            <i class="stars">****</i>
-            <i class="score">3.6</i>
-            <i class="sales_sum">月售106单</i>
-          </p>
-          <p class="price">
-            <i class="start_price">$20起送</i>
-            <i class="xie">/</i>
-            <i class="peisonfei">配送费约$5</i>
-          </p>
-        </div>
-        <div class="right">
-          <p class="flag">保 准 票</p>
-          <span>硅谷专送</span>
-        </div>
-      </li>
-      <li class="shop_item">
-        <div class="left">
-          <img src="./images/shop/1.jpg" alt>
-        </div>
-        <div class="middle">
-          <p class="title">
-            <i class="flag">品牌</i>
-            <span class="shop_name ellipsis">小李私房菜</span>
-          </p>
-          <p class="sales">
-            <i class="stars">****</i>
-            <i class="score">3.6</i>
-            <i class="sales_sum">月售106单</i>
-          </p>
-          <p class="price">
-            <i class="start_price">$20起送</i>
-            <i class="xie">/</i>
-            <i class="peisonfei">配送费约$5</i>
-          </p>
-        </div>
-        <div class="right">
-          <p class="flag">保 准 票</p>
-          <span>硅谷专送</span>
-        </div>
-      </li>
-      <li class="shop_item">
-        <div class="left">
-          <img src="./images/shop/1.jpg" alt>
-        </div>
-        <div class="middle">
-          <p class="title">
-            <i class="flag">品牌</i>
-            <span class="shop_name ellipsis">小李私房菜</span>
-          </p>
-          <p class="sales">
-            <i class="stars">****</i>
-            <i class="score">3.6</i>
-            <i class="sales_sum">月售106单</i>
-          </p>
-          <p class="price">
-            <i class="start_price">$20起送</i>
-            <i class="xie">/</i>
-            <i class="peisonfei">配送费约$5</i>
-          </p>
-        </div>
-        <div class="right">
-          <p class="flag">保 准 票</p>
-          <span>硅谷专送</span>
-        </div>
-      </li>
+      </li>      
+    </ul>
+    <ul v-else>
+      <li class="shop_item nodata" v-for="(n) in 8" :key="n"></li>
     </ul>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import Stars from "../Stars/Stars";
 export default {
-  name: "ShopsList"
+  name: "ShopsList",
+  data() {
+    return {
+      base_image_url: "http://localhost:8000/public/images",
+      show_nearby_shops:false
+    };
+  },
+  components: {
+    Stars
+  },
+  created() {
+    this.$store.dispatch("get_nearby_shops",(err,data)=>{
+      if(data){
+        this.show_nearby_shops=true
+      }
+    });
+  },
+  computed: {
+    ...mapState(["nearby_shops"])
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -159,6 +85,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   height: 10rem;
+  &.nodata{
+    background:url('./images/shop_back.svg') no-repeat center center;
+  }
 }
 .shop_item img {
   width: 7rem;
@@ -184,6 +113,9 @@ export default {
 .middle .sales {
   font-size: 0.8rem;
   color: #999;
+  & > * {
+    margin-right: 5px;
+  }
 }
 .middle .sales .stars {
   color: #ff9900;
@@ -199,16 +131,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-}
-.right p {
-  color: #999;
-  font-size: 1rem;
-}
-.right span {
-  color: #00a774;
-  border: 1px solid #00a774;
-  font-size: 0.6rem;
-  margin-top: 20px;
+  justify-content: space-between;
+  div {
+    color: #999;
+    font-size: 1rem;
+    span {
+      color: #00a774;
+      border: 1px solid #00a774;
+      font-size: 12px;
+      line-height: 12px;
+      // margin-top: 20px;
+      margin: 0 2px;
+      // padding: 0;
+    }
+  }
+  &>span{
+    color: #ffd92f;
+  }
 }
 </style>

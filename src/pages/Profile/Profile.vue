@@ -4,8 +4,9 @@
         <div class="user_info" @click="$router.push('/Login')">
             <img src="" alt="">
             <div>
-                <span class="top">登录/注册</span>
-                <span class="bottom"><i class="iconfont iconshouji"></i>暂无绑定手机号</span>
+                <span class="top" v-if="user_info._id">{{user_info.name || user_info.phone}}</span>
+                <span class="top" v-else>登录/注册</span>
+                <span class="bottom" v-show="!user_info.phone"><i class="iconfont iconshouji"></i>暂无绑定手机号</span>
             </div>
             <i class="iconfont iconicondayu"></i>
         </div>
@@ -14,11 +15,15 @@
 </template>
 <script>
 import TopArea from '../../components/TopArea/TopArea'
+import {mapState} from 'vuex'
 export default {
     name:'Profile',
     components:{
         TopArea
-    }
+    },
+    computed: {
+        ...mapState(['user_info'])
+    },
     
 }
 </script>
