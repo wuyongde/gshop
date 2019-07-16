@@ -2,12 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-import Msite from "../pages/Msite/Msite";
-import Search from "../pages/Search/Search";
-import Order from "../pages/Order/Order";
-import Profile from "../pages/Profile/Profile";
-import Login from "../pages/Login/Login";
-import Shop from "../pages/Shop/Shop";
+// 实现主要路由组件懒加载
+const Msite = () => import("../pages/Msite/Msite");
+const Search = () => import("../pages/Search/Search");
+const Order = () => import("../pages/Order/Order");
+const Profile = () => import("../pages/Profile/Profile");
+const Login = () => import("../pages/Login/Login");
+const Shop = () => import("../pages/Shop/Shop");
+
 import ShopFoods from "../pages/Shop/ShopFoods/ShopFoods";
 import ShopRates from "../pages/Shop/ShopRates/ShopRates";
 import ShopInfos from "../pages/Shop/ShopInfos/ShopInfos";

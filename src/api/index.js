@@ -44,14 +44,24 @@ function req_nearby_shops(latitude, longitude, callback) {
     });
 }
 
+// 4---根据经纬度和关键字搜索商铺列表
+function req_search_shops({ geohash, keyword }, callback) {
+  axios
+    .get(`/search_shops?keyword=${keyword}&geohash=${geohash}`)
+    .then(resp => {
+      callback(null, resp.data.data);
+    })
+    .catch(err => {
+      callback(err);
+    });
+}
+
 //  5---获取一次性验证码
 
-
-
 //  6---用户名密码登陆
-function req_user_login(name, pwd,captcha, callback) {
+function req_user_login(name, pwd, captcha, callback) {
   axios
-    .post(`/login_pwd`, { name, pwd,captcha })      //注意：此处是通过json对象的方式提交的post请求体，服务端要做对应的解析
+    .post(`/login_pwd`, { name, pwd, captcha }) //注意：此处是通过json对象的方式提交的post请求体，服务端要做对应的解析
     .then(resp => {
       callback(null, resp.data);
     })
@@ -59,8 +69,6 @@ function req_user_login(name, pwd,captcha, callback) {
       callback(err);
     });
 }
-
-
 
 //  7---发送短信验证码
 function req_sms_veriyNumber(phone, callback) {
@@ -77,7 +85,7 @@ function req_sms_veriyNumber(phone, callback) {
 //  8---手机号验证码登陆
 function req_sms_login(phone, code, callback) {
   axios
-    .post(`/login_sms`, { phone, code })      //注意：此处是通过json对象的方式提交的post请求体，服务端要做对应的解析
+    .post(`/login_sms`, { phone, code }) //注意：此处是通过json对象的方式提交的post请求体，服务端要做对应的解析
     .then(resp => {
       callback(null, resp.data);
     })
@@ -85,8 +93,6 @@ function req_sms_login(phone, code, callback) {
       callback(err);
     });
 }
-
-
 
 //  9---获取店铺信息
 function req_shop_info(callback) {
@@ -124,7 +130,6 @@ function req_shop_ratings(callback) {
     });
 }
 
-
 // 导出接口函数
 export {
   req_address,
@@ -135,5 +140,6 @@ export {
   req_user_login,
   req_shop_info,
   req_shop_goods,
-  req_shop_ratings
+  req_shop_ratings,
+  req_search_shops
 };

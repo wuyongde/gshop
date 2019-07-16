@@ -25,7 +25,7 @@
               @click="show_food_detail(food)"
             >
               <div class="left">
-                <img :src="food.icon" alt />
+                <img v-lazy="food.icon" alt />
               </div>
               <div class="right">
                 <h3 class="name">{{food.name}}</h3>

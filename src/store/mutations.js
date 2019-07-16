@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from "vue";
 
 import {
   GET_ADDRESS,
@@ -9,7 +9,8 @@ import {
   GET_SHOP_GOODS,
   GET_SHOP_RATINGS,
   UPDATE_SELECT_COUNT,
-  CLEAR_SHOP_CAR
+  CLEAR_SHOP_CAR,
+  GET_SEARCH_SHOPS
 } from "./mutations-types";
 
 export default {
@@ -29,22 +30,22 @@ export default {
   [GET_SHOP_INFO](state, info) {
     state.curr_shop_info = info;
   },
+
   [GET_SHOP_GOODS](state, goods) {
     state.curr_shop_goods = goods;
-
   },
+
   [GET_SHOP_RATINGS](state, ratings) {
     state.curr_shop_ratings = ratings;
   },
 
   [UPDATE_SELECT_COUNT](state, { food, isAdd }) {
-
     if (!food.selectCount) {
       switch (isAdd) {
         case true:
           // food.selectCount = 1;
-          Vue.set(food,'selectCount',1)     //如果不通过这种方式添加后来添加的属性，在其绑定的dom视图中不会更新显示！！！
-          state.shopCar.push(food)
+          Vue.set(food, "selectCount", 1); //如果不通过这种方式添加后来添加的属性，在其绑定的dom视图中不会更新显示！！！
+          state.shopCar.push(food);
           break;
         case false:
           return;
@@ -54,21 +55,25 @@ export default {
         food.selectCount++;
       } else {
         food.selectCount--;
-        if(food.selectCount===0){
-          const index=state.shopCar.findIndex(item=>{
-            return item.selectCount===0
-          })
-          state.shopCar.splice(index,1)
+        if (food.selectCount === 0) {
+          const index = state.shopCar.findIndex(item => {
+            return item.selectCount === 0;
+          });
+          state.shopCar.splice(index, 1);
         }
       }
     }
   },
 
-  [CLEAR_SHOP_CAR](state){
-         // 清空购物车信息
-         state.shopCar.forEach(item=>{
-           item.selectCount=0
-         })
-        state.shopCar=[]
+  [CLEAR_SHOP_CAR](state) {
+    // 清空购物车信息
+    state.shopCar.forEach(item => {
+      item.selectCount = 0;
+    });
+    state.shopCar = [];
+  },
+
+  [GET_SEARCH_SHOPS](state, {data}) {
+    state.search_shops = data;
   }
 };

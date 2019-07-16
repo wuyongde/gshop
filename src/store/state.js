@@ -8,5 +8,6 @@ export default {
   curr_shop_info: {},
   curr_shop_goods: [],
   curr_shop_ratings: [],
-  shopCar:[]      //购物车
+  shopCar:[],      //购物车
+  search_shops:[]   //搜索结果的商铺列表
 };

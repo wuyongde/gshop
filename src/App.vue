@@ -9,39 +9,34 @@ import FooterGuide from "./components/FooterGuide/FooterGuide";
 export default {
   name: "App",
   data() {
-    return {
-      show_FooterGuide: true
-    };
+    return {};
   },
   components: {
     FooterGuide
   },
-  watch: {
-    '$route.path'(newValue) {
-      switch (newValue) {
+  computed: {
+    show_FooterGuide() {
+      switch (this.$route.path) {
         case "/":
-          this.show_FooterGuide = true;
+          return true;
           break;
         case "/msite":
-          this.show_FooterGuide = true;
+          return true;
           break;
         case "/order":
-          this.show_FooterGuide = true;
+          return true;
           break;
         case "/search":
-          this.show_FooterGuide = true;
+          return true;
           break;
         case "/profile":
-          this.show_FooterGuide = true;
+          return true;
           break;
         default:
-          this.show_FooterGuide = false;
+          return false;
       }
     }
-  },
-  methods: {
-    
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

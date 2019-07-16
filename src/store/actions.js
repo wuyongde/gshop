@@ -5,7 +5,8 @@ import {
   req_nearby_shops,
   req_shop_info,
   req_shop_goods,
-  req_shop_ratings
+  req_shop_ratings,
+  req_search_shops
 } from "../api/index";
 
 import {
@@ -17,7 +18,8 @@ import {
   GET_SHOP_GOODS,
   GET_SHOP_RATINGS,
   UPDATE_SELECT_COUNT,
-  CLEAR_SHOP_CAR
+  CLEAR_SHOP_CAR,
+  GET_SEARCH_SHOPS
 } from "./mutations-types";
 
 // 异步请求必须写在actions中
@@ -110,6 +112,22 @@ export default {
   // 同步---清空购物车
   [CLEAR_SHOP_CAR]({commit,state}){
       commit(CLEAR_SHOP_CAR)
-    }
+    },
+
+
+
+  // 根据经纬度和关键字搜索商铺列表
+  [GET_SEARCH_SHOPS]({ commit, state }, keyword) {
+    // 准备请求参数
+    const geohash=`40.10038,116.36867`
+    // 发ajax请求
+    req_search_shops({ geohash:geohash, keyword:keyword }, (err, data) => {
+      if (err) {
+        return;
+      } else {
+        commit(GET_SEARCH_SHOPS, { data });
+      }
+    });
+  },
 
 };

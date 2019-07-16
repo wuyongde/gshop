@@ -1,7 +1,7 @@
 <template>
     <div class="FoodDetails">
         <div class="food_img">
-            <img :src="food.image" alt="">
+            <img v-lazy="food.image" alt="">
             <span class="btn_close" @click="close">x</span>
         </div>
         <div class="food_info">
